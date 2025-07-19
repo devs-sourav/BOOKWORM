@@ -1,5 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/(frontend)/(auth)/login/page": "app/(frontend)/(auth)/login/page.js",
-  "/(frontend)/(auth)/registration/page": "app/(frontend)/(auth)/registration/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js"
 }

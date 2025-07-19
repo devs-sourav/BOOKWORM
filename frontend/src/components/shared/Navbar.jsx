@@ -19,7 +19,7 @@ export const Navbar = () => {
     { name: "Author", path: "/author" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
-    { name: "About us", path: "/about" }
+    { name: "About us", path: "/about" },
   ];
 
   // Function to check if a nav item is active
@@ -88,13 +88,16 @@ export const Navbar = () => {
                 </div>
               </div>
               {/* Account */}
-              <div className="flex items-center space-x-1">
-                <User className="w-5 h-5" />
-                <div>
-                  <p className="text-sm">Sign In</p>
-                  <p className="text-md font-semibold">My Account</p>
-                </div>
+              <div>
+                <Link href={"/login"} className="flex items-center space-x-1">
+                  <User className="w-5 h-5" />
+                  <div>
+                    <p className="text-sm">Sign In</p>
+                    <p className="text-md font-semibold">My Account</p>
+                  </div>
+                </Link>
               </div>
+
               {/* Cart */}
               <div className="flex items-center space-x-1 relative">
                 <div className="relative">
