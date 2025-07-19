@@ -99,17 +99,21 @@ export const Navbar = () => {
               </div>
 
               {/* Cart */}
-              <div className="flex items-center space-x-1 relative">
-                <div className="relative">
-                  <ShoppingCart className="w-5 h-5" />
-                  <span className="absolute -top-2 -left-2 text-xs bg-white text-black rounded-full px-[5px]">
-                    0
-                  </span>
-                </div>
-                <div>
-                  <p className="text-sm">My Cart</p>
-                  <p className="text-md font-semibold">$ 0.00</p>
-                </div>
+              <div>
+                <Link href={"/cart"}>
+                  <div className="flex items-center space-x-1 relative">
+                    <div className="relative">
+                      <ShoppingCart className="w-5 h-5" />
+                      <span className="absolute -top-2 -left-2 text-xs bg-white text-black rounded-full px-[5px]">
+                        0
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-sm">My Cart</p>
+                      <p className="text-md font-semibold">$ 0.00</p>
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

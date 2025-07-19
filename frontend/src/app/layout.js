@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ReduxProvider } from "@/store/ReduxProvider";
 import AuthInitializer from "@/components/Authinitializer";
 import ConditionalNavbar from "@/components/shared/ConditionalNavbar";
+import ConditionalFooter from "@/components/shared/ConditionalFooter";
 
 // Load the Inter font and assign to a CSS variable
 const inter = Inter({
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           <div>
             <ConditionalNavbar />
             <div>{children}</div>
+            <ConditionalFooter/>
           </div>
           <ToastContainer
             position="top-right"
