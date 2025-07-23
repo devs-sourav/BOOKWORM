@@ -1,5 +1,6 @@
 "use client";
 import { Heart, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 // Product Card Component
 function ProductCard({ product }) {
@@ -12,7 +13,7 @@ function ProductCard({ product }) {
           {/* Product Image */}
           <div className="flex justify-center py-5">
             <div className="block w-[120px] h-[183px]">
-              <a href={href} className="block">
+              <Link href={"/product-details"} className="block">
                 <img
                   width="120"
                   height="183"
@@ -21,7 +22,7 @@ function ProductCard({ product }) {
                   className="w-full h-auto object-cover"
                   loading="lazy"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -29,15 +30,15 @@ function ProductCard({ product }) {
           <div className="pt-3 bg-white group-hover/edit:-translate-y-10 transition-all duration-500">
             {/* Format/Type */}
             <div className="text-xs uppercase mb-1 text-[#FE0D0D] font-medium">
-              <a href="#" className="hover:underline">
+              <Link href="#" className="hover:underline">
                 {type}
-              </a>
+              </Link>
             </div>
 
             {/* Title - Fixed: Added proper text truncation */}
             <h2 className="text-sm font-medium mb-1 leading-tight text-gray-900 hover:text-gray-700">
-              <a
-                href={href}
+              <Link
+                href={"/product-details"}
                 className="hover:underline block overflow-hidden"
                 style={{
                   display: "-webkit-box",
@@ -47,7 +48,7 @@ function ProductCard({ product }) {
                 }}
               >
                 {title}
-              </a>
+              </Link>
             </h2>
 
             {/* Author */}
