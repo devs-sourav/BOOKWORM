@@ -19,7 +19,7 @@ const AuthorCard = ({
       role="article"
     >
       <Link
-        href={`/book-author/${slug}`}
+        href={`/author/${slug}`}
         title={name}
         className="block"
       >

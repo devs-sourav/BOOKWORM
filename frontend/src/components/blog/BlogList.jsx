@@ -124,6 +124,7 @@ export default function BlogList() {
             {filteredArticles.map((article) => (
               <BlogCard
                 key={article.id}
+                id={article.id}
                 image={article.image}
                 date={article.date}
                 comments={article.comments}
