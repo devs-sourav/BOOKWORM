@@ -12,11 +12,11 @@ import PriceFilterSection from "./PriceFilterSection";
 const BookstoreSidebar = () => {
   const [expandedSections, setExpandedSections] = useState({
     featured: true,
-    categories: false,
-    authors: false,
-    formats: false,
-    price: false,
-    reviews: false,
+    categories: true,
+    authors: true,
+    formats: true,
+    price: true,
+    reviews: true,
   });
 
   const toggleSection = (sectionKey) => {

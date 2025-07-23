@@ -1,6 +1,7 @@
 import ShopBradCumb from "@/components/products/ShopBradCumb";
 import { Container } from "@/components/shared/Container";
 import BookstoreSidebar from "@/components/shop/BookstoreSidebar";
+import ShopControlBar from "@/components/shop/ShopControlBar";
 
 export const metadata = {
   title: "BookWorm - Bookstore & Bookshop",
@@ -18,7 +19,10 @@ export default function RootLayout({ children }) {
               <BookstoreSidebar />
             </div>
             <div className="col-span-9">
-              <div className=" ">{children}</div>
+              <div>
+                {/* <ShopControlBar/> */}
+                <div className=" ">{children}</div>
+              </div>
             </div>
           </div>
         </Container>

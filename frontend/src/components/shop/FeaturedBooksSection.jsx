@@ -23,7 +23,7 @@ const FeaturedBooksSection = () => {
   ];
 
   return (
-    <ul className="space-y-4 px-6 pb-6">
+    <ul className="space-y-4 px-6 pb-6 pt-3">
       {featuredBooks.map((book) => (
         <li key={book.title}>
           <div className="flex space-x-3">

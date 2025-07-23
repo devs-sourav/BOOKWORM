@@ -15,11 +15,9 @@ export default function BlogCard({ image, date, comments, title }) {
       </div>
       <div className="text-sm text-gray-500 mt-2 flex gap-4">
         <span>{date}</span>
-        {/* {comments && <span>{comments}</span>} */}
+        {comments && <span>{comments}</span>}
       </div>
-      <h3 className="text-sm text-black mt-1 font-medium leading-snug">
-        {title}
-      </h3>
+      <h3 className="text-sm text-black mt-1 font-medium leading-snug">{title}</h3>
     </div>
   );
 }

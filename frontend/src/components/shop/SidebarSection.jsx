@@ -4,8 +4,8 @@ import { Minus, Plus } from 'lucide-react';
 const SidebarSection = ({ title, isExpanded, onToggle, children }) => (
   <div>
     <div
-      className={`flex px-6 pt-6 items-center justify-between cursor-pointer ${
-        isExpanded ? 'pb-0' : 'pb-6'
+      className={`flex px-6 pt-4 items-center justify-between cursor-pointer ${
+        isExpanded ? 'pb-0' : 'pb-4'
       }`}
       onClick={onToggle}
     >

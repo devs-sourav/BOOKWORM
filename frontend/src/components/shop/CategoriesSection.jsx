@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const CategoriesSection = () => {
-  const categories = [
+  const [expanded, setExpanded] = useState({});
+
+  const toggleCategory = (name) => {
+    setExpanded((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
+  };
+
+    const categories = [
     { name: 'Arts & Photography', href: '/category/arts-photography' },
     { name: 'Baby', href: '/category/baby' },
     { 
@@ -154,21 +164,43 @@ const CategoriesSection = () => {
     { name: 'Uncategorized', href: '/category/uncategorized' }
   ];
 
-  const renderCategoryItem = (category, level = 0) => (
-    <li key={category.name} className={`${level > 0 ? 'ml-4' : ''}`}>
-      <a
-        href={category.href}
-        className="text-gray-700 hover:text-blue-600 text-sm py-1 block transition-colors"
-      >
-        {category.name}
-      </a>
-      {category.children && (
-        <ul className="mt-1">
-          {category.children.map((child) => renderCategoryItem(child, level + 1))}
-        </ul>
-      )}
-    </li>
-  );
+  const renderCategoryItem = (category, level = 0) => {
+    const hasChildren = !!category.children?.length;
+    const isExpanded = expanded[category.name];
+
+    return (
+      <li key={category.name} className={`pl-${level * 4} py-1`}>
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() => hasChildren && toggleCategory(category.name)}
+        >
+          <a
+            href={category.href}
+            className="text-gray-800 hover:text-blue-600 text-sm block"
+          >
+            {category.name}
+          </a>
+          {hasChildren && (
+            <span className="ml-2 text-gray-500">
+              {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+            </span>
+          )}
+        </div>
+
+        {hasChildren && (
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              isExpanded ? 'max-h-[1000px] mt-1' : 'max-h-0'
+            }`}
+          >
+            <ul className="pl-4 border-l border-gray-200">
+              {category.children.map((child) => renderCategoryItem(child, level + 1))}
+            </ul>
+          </div>
+        )}
+      </li>
+    );
+  };
 
   return (
     <ul className="space-y-1 px-6 pb-6">
