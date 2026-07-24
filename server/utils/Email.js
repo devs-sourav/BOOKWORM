@@ -10,10 +10,22 @@ module.exports = class Email {
   }
 
   newTransport() {
+    // For Gmail: use app-specific password and port 587
+    if (process.env.EMAIL_SERVICE === "gmail" || process.env.EMAIL_USERNAME?.includes("gmail")) {
+      return nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+      });
+    }
+
+    // For other email services
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      service: "gmail",
+      port: parseInt(process.env.EMAIL_PORT || "587"),
+      secure: process.env.EMAIL_SECURE === "true" || parseInt(process.env.EMAIL_PORT) === 465,
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD,
@@ -207,9 +219,9 @@ module.exports = class Email {
               Thank you for choosing BookWorm. We're here to help you discover your next great read.
             </div>
             <div class="social-links">
-              <a href="http://localhost:5173" class="social-link">Website</a> |
-              <a href="http://localhost:5173/support" class="social-link">Support</a> |
-              <a href="http://localhost:5173/unsubscribe" class="social-link">Unsubscribe</a>
+              <a href="${this.url}" class="social-link">Website</a> |
+              <a href="${this.url}/support" class="social-link">Support</a> |
+              <a href="${this.url}/unsubscribe" class="social-link">Unsubscribe</a>
             </div>
             <div style="font-size: 12px; color: #9ca3af; margin-top: 16px;">
               © 2025 BookWorm. All rights reserved.
@@ -238,7 +250,25 @@ module.exports = class Email {
       }),
     };
 
-    await this.newTransport().sendMail(mailOptions);
+    try {
+      const transporter = this.newTransport();
+      
+      // Verify connection before sending
+      console.log("🔍 Verifying email connection...");
+      await transporter.verify();
+      console.log("✅ Email service verified successfully");
+      
+      console.log(`📤 Sending email to: ${this.to}`);
+      const info = await transporter.sendMail(mailOptions);
+      console.log(`✅ Email sent successfully: ${info.messageId}`);
+      
+      return info;
+    } catch (error) {
+      console.error("❌ Email send error:", error.message);
+      console.error("📧 Recipient:", this.to);
+      console.error("📧 From:", this.from);
+      throw error;
+    }
   }
 
   async sendWelcome() {
@@ -563,7 +593,7 @@ module.exports = class Email {
       <!-- Action Buttons -->
       <div style="text-align: center; margin-bottom: 32px;">
 
-        <a href="http://localhost:5173/contact" 
+        <a href="${this.url}/contact" 
            style="display: inline-block; background: white; color: #667eea; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; border: 2px solid #667eea;">
           Contact Support
         </a>

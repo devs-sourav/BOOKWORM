@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { useDispatch } from "react-redux";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "https://bookworm-t3mi.onrender.com";
+const API_BASE = "https://bookworm-t3mi.onrender.com";
 
 const OrderPaymentSuccess = () => {
   const [orderData, setOrderData] = useState(null);

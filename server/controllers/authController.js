@@ -101,9 +101,14 @@ exports.signupController = catchAsync(async (req, res, next) => {
   user.password = undefined;
 
   try {
-    // Use frontend URL for email verification link
-    const url = `${process.env.FRONTEND_BASE_URL}/verify-email?token=${emailVerificationToken}`;
-    await new Email(user, url).sendWelcome();
+    // Use frontend URL for email verification link - get from environment or use default
+    const frontendUrl = process.env.FRONTEND_BASE_URL || "http://localhost:5173";
+    const url = `${frontendUrl}/verify-email?token=${emailVerificationToken}`;
+    
+    console.log("📧 Sending welcome email to:", user.email);
+    console.log("📧 Frontend URL:", frontendUrl);
+    
+    await new Email(user, frontendUrl).sendWelcome();
 
     res.status(201).json({
       status: "success",
@@ -114,6 +119,9 @@ exports.signupController = catchAsync(async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.error("❌ EMAIL SEND ERROR:", err.message);
+    console.error("📧 Error Details:", err.stack);
+
     // If email fails, clean up the verification token
     await User.findByIdAndUpdate(user._id, {
       $unset: {
